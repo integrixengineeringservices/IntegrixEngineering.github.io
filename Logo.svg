@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
+  <style>
+    .main { font-family: 'Times New Roman', serif; font-size: 160px; fill: black; }
+    .sub { font-family: Arial, sans-serif; font-size: 60px; fill: black; letter-spacing: 6px; }
+  </style>
+
+  <!-- Integral sign as I -->
+  <text x="50" y="170" class="main">∫ntegrix</text>
+
+  <!-- Engineering Services -->
+  <text x="180" y="250" class="sub">ENGINEERING SERVICES</text>
+</svg>
