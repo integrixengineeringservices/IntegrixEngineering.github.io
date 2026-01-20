@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Integrix Engineering Services</title>
+  <meta name="description" content="Integrix Engineering Services — mechanical equipment drafting support for fabricators, contractors, and manufacturers." />
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111111;
+      --muted:#555555;
+      --line:#e6e6e6;
+      --card:#f7f7f7;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.5;
+    }
+    a{color:inherit}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+    header{
+      position:sticky; top:0; z-index:10;
+      background:rgba(255,255,255,0.92);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:saturate(180%) blur(10px);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; flex-direction:column; gap:2px;
+    }
+    .brand strong{font-size:16px; letter-spacing:0.2px}
+    .brand span{font-size:12px; color:var(--muted)}
+    nav ul{
+      list-style:none; margin:0; padding:0;
+      display:flex; gap:14px; flex-wrap:wrap;
+    }
+    nav a{
+      text-decoration:none;
+      padding:8px 10px;
+      border:1px solid transparent;
+      border-radius:10px;
+      color:var(--muted);
+    }
+    nav a:hover{
+      border-color:var(--line);
+      color:var(--text);
+      background:#fff;
+    }
+    section{padding:64px 0}
+    .hero{
+      padding:56px 0 44px;
+    }
+    .kicker{
+      display:inline-block;
+      border:1px solid var(--line);
+      background:#fff;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:42px;
+      line-height:1.15;
+      letter-spacing:-0.5px;
+    }
+    .lead{
+      margin:0;
+      color:var(--muted);
+      max-width:70ch;
+      font-size:16px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12, 1fr);
+      gap:16px;
+      margin-top:26px;
+    }
+    .card{
+      grid-column: span 4;
+      border:1px solid var(--line);
+      background:var(--card);
+      border-radius:16px;
+      padding:16px;
+      min-height:120px;
+    }
+    .card h3{margin:0 0 6px; font-size:14px}
+    .card p{margin:0; color:var(--muted); font-size:14px}
+    .section-title{
+      margin:0 0 10px;
+      font-size:26px;
+      letter-spacing:-0.2px;
+    }
+    .section-sub{
+      margin:0 0 20px;
+      color:var(--muted);
+      max-width:80ch;
+    }
+    .service-list{
+      margin:0; padding-left:18px; color:var(--muted);
+    }
+    .quote-box{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px;
+      background:#fff;
+    }
+    .quote-box p{margin:0 0 10px; color:var(--muted)}
+    .email{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:var(--card);
+      text-decoration:none;
+    }
+    footer{
+      border-top:1px solid var(--line);
+      padding:18px 0;
+      color:var(--muted);
+      font-size:12px;
+    }
+    @media (max-width: 900px){
+      h1{font-size:34px}
+      .card{grid-column: span 12}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand" aria-label="Company name">
+          <strong>Integrix Engineering Services</strong>
+          <span>Mechanical Equipment Drafting Support</span>
+        </div>
+
+        <nav aria-label="Primary">
+          <ul>
+            <li><a href="#company">Company</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact Us for a Quote</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1) Company -->
+  <main>
+    <section id="company" class="hero">
+      <div class="wrap">
+        <span class="kicker">Engineering drafting services</span>
+        <h1>Clear, buildable drawings for mechanical equipment.</h1>
+        <p class="lead">
+          Integrix Engineering Services provides practical drafting support for mechanical equipment and assemblies.
+          We focus on producing organized, fabrication-ready drawings that help teams move from concept to shop floor
+          with fewer iterations and fewer surprises.
+        </p>
+
+        <div class="grid" role="list" aria-label="Company highlights">
+          <div class="card" role="listitem">
+            <h3>Drafting-first deliverables</h3>
+            <p>Clean layouts, consistent dimensioning, and drawing packages aligned to real fabrication needs.</p>
+          </div>
+          <div class="card" role="listitem">
+            <h3>Fast collaboration</h3>
+            <p>Responsive updates, clear markups, and practical design-for-manufacture feedback.</p>
+          </div>
+          <div class="card" role="listitem">
+            <h3>Simple, professional output</h3>
+            <p>Readable drawing sets that are easy to review, quote, and build from.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2) Services -->
+    <section id="services">
+      <div class="wrap">
+        <h2 class="section-title">Services</h2>
+        <p class="section-sub">
+          Mechanical equipment drafting services to support fabrication, installation, and documentation.
+          Typical deliverables include 2D drawings, assembly drawings, and shop-ready packages.
+        </p>
+
+        <div class="grid" aria-label="Drafting service details">
+          <div class="card" style="grid-column: span 6;">
+            <h3>Mechanical equipment drafting</h3>
+            <p>
+              Drafting support for skids, frames, brackets, guards, panels, and general mechanical assemblies.
+            </p>
+          </div>
+          <div class="card" style="grid-column: span 6;">
+            <h3>Drawing packages</h3>
+            <p>
+              Structured deliverables that can include GA drawings, BOMs, key dimensions, and revision tracking.
+            </p>
+          </div>
+          <div class="card" style="grid-column: span 12;">
+            <h3>Common scope items</h3>
+            <ul class="service-list">
+              <li>2D fabrication drawings (parts, weldments, assemblies)</li>
+              <li>General arrangement drawings and key interface dimensions</li>
+              <li>Redlines / markup incorporation and drawing cleanup</li>
+              <li>Basic documentation support (title blocks, revision tables, drawing registers)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3) Contact -->
+    <section id="contact">
+      <div class="wrap">
+        <h2 class="section-title">Contact Us for a Quote</h2>
+        <div class="quote-box">
+          <p>
+            Send a brief description of your project scope, target deliverables, and timing. If you have reference
+            sketches, markups, or existing drawings, include them for faster turnaround.
+          </p>
+
+          <!-- Replace the email below with your real email address -->
+          <a class="email" href="mailto:YOURNAME@YOURDOMAIN.COM">YOURNAME@YOURDOMAIN.COM</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> Integrix Engineering Services. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Auto-update footer year (optional)
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
