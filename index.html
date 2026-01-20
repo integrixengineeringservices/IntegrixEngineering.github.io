@@ -4,250 +4,503 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Integrix Engineering Services</title>
-  <meta name="description" content="Integrix Engineering Services — mechanical equipment drafting support for fabricators, contractors, and manufacturers." />
+  <meta name="description" content="Integrix Engineering Services — engineering, drafting, and design support." />
+
   <style>
     :root{
-      --bg:#ffffff;
-      --text:#111111;
-      --muted:#555555;
-      --line:#e6e6e6;
-      --card:#f7f7f7;
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #555555;
+      --line: #e7e7e7;
+      --card: #fafafa;
+
+      --maxw: 1100px;
+
+      /* Fluid type & spacing for “smart fitting” on resize */
+      --step--1: clamp(0.90rem, 0.85rem + 0.25vw, 1.00rem);
+      --step-0:  clamp(1.00rem, 0.95rem + 0.35vw, 1.15rem);
+      --step-1:  clamp(1.20rem, 1.05rem + 0.75vw, 1.55rem);
+      --step-2:  clamp(1.50rem, 1.25rem + 1.10vw, 2.10rem);
+      --step-3:  clamp(1.90rem, 1.50rem + 1.80vw, 2.80rem);
+
+      --space-1: clamp(0.50rem, 0.35rem + 0.60vw, 0.90rem);
+      --space-2: clamp(0.80rem, 0.55rem + 0.90vw, 1.30rem);
+      --space-3: clamp(1.10rem, 0.80rem + 1.30vw, 1.90rem);
+      --space-4: clamp(1.60rem, 1.00rem + 2.10vw, 2.80rem);
+
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.07);
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
     body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color:var(--text);
-      background:var(--bg);
-      line-height:1.5;
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+      font-size: var(--step-0);
+      line-height: 1.55;
+      text-rendering: optimizeLegibility;
     }
-    a{color:inherit}
-    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    .container{
+      width: min(var(--maxw), calc(100% - 2 * var(--space-3)));
+      margin-inline: auto;
+    }
+
+    /* Header */
     header{
-      position:sticky; top:0; z-index:10;
-      background:rgba(255,255,255,0.92);
-      border-bottom:1px solid var(--line);
-      backdrop-filter:saturate(180%) blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
     }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px;
-      padding:14px 0;
+    .header-inner{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-2) 0;
+      gap: var(--space-2);
     }
+
     .brand{
-      display:flex; flex-direction:column; gap:2px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      min-width: 0;
     }
-    .brand strong{font-size:16px; letter-spacing:0.2px}
-    .brand span{font-size:12px; color:var(--muted)}
-    nav ul{
-      list-style:none; margin:0; padding:0;
-      display:flex; gap:14px; flex-wrap:wrap;
+    .brand img{
+      height: clamp(42px, 4vw, 62px);
+      width: auto;
+      max-width: 100%;
+      display: block;
+    }
+
+    nav{
+      display: flex;
+      align-items: center;
+      gap: clamp(0.6rem, 0.6rem + 1vw, 1.4rem);
+      font-size: var(--step--1);
+      white-space: nowrap;
     }
     nav a{
-      text-decoration:none;
-      padding:8px 10px;
-      border:1px solid transparent;
-      border-radius:10px;
-      color:var(--muted);
+      padding: 0.55rem 0.75rem;
+      border-radius: 10px;
     }
     nav a:hover{
-      border-color:var(--line);
-      color:var(--text);
-      background:#fff;
+      background: #f3f3f3;
+      text-decoration: none;
     }
-    section{padding:64px 0}
+
+    /* Mobile menu */
+    .menu-btn{
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 12px;
+      padding: 0.55rem 0.75rem;
+      font-size: var(--step--1);
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    @media (max-width: 760px){
+      nav{
+        display: none;
+        position: absolute;
+        right: var(--space-3);
+        top: calc(100% + 0.5rem);
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        padding: 0.35rem;
+        flex-direction: column;
+        align-items: stretch;
+        min-width: 220px;
+      }
+      nav a{ padding: 0.75rem 0.9rem; }
+      .menu-btn{ display: inline-flex; }
+      header[data-open="true"] nav{ display: flex; }
+    }
+
+    /* Hero title */
     .hero{
-      padding:56px 0 44px;
+      padding: var(--space-4) 0 var(--space-3);
     }
-    .kicker{
-      display:inline-block;
-      border:1px solid var(--line);
-      background:#fff;
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:12px;
-      color:var(--muted);
+    .hero h1{
+      margin: 0;
+      font-size: var(--step-3);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      text-align: center;
+      text-wrap: balance;
     }
-    h1{
-      margin:14px 0 10px;
-      font-size:42px;
-      line-height:1.15;
-      letter-spacing:-0.5px;
+    .hero .sub{
+      margin: var(--space-2) auto 0;
+      max-width: 70ch;
+      text-align: center;
+      color: var(--muted);
+      font-size: var(--step-0);
     }
-    .lead{
-      margin:0;
-      color:var(--muted);
-      max-width:70ch;
-      font-size:16px;
+    .rule{
+      height: 2px;
+      background: var(--line);
+      margin: var(--space-3) auto 0;
+      width: min(520px, 80%);
+      border-radius: 999px;
     }
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(12, 1fr);
-      gap:16px;
-      margin-top:26px;
+
+    /* Sections */
+    section{
+      padding: var(--space-4) 0;
+      border-top: 1px solid var(--line);
     }
-    .card{
-      grid-column: span 4;
-      border:1px solid var(--line);
-      background:var(--card);
-      border-radius:16px;
-      padding:16px;
-      min-height:120px;
+    section h2{
+      font-size: var(--step-2);
+      margin: 0 0 var(--space-3);
+      letter-spacing: -0.01em;
+      text-align: center;
+      text-wrap: balance;
     }
-    .card h3{margin:0 0 6px; font-size:14px}
-    .card p{margin:0; color:var(--muted); font-size:14px}
-    .section-title{
-      margin:0 0 10px;
-      font-size:26px;
-      letter-spacing:-0.2px;
-    }
-    .section-sub{
-      margin:0 0 20px;
-      color:var(--muted);
-      max-width:80ch;
-    }
-    .service-list{
-      margin:0; padding-left:18px; color:var(--muted);
-    }
-    .quote-box{
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:18px;
-      background:#fff;
-    }
-    .quote-box p{margin:0 0 10px; color:var(--muted)}
-    .email{
-      display:inline-block;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:var(--card);
-      text-decoration:none;
-    }
-    footer{
-      border-top:1px solid var(--line);
-      padding:18px 0;
-      color:var(--muted);
-      font-size:12px;
+
+    /* Two-column responsive layout */
+    .two-col{
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: var(--space-4);
+      align-items: start;
     }
     @media (max-width: 900px){
-      h1{font-size:34px}
-      .card{grid-column: span 12}
+      .two-col{ grid-template-columns: 1fr; }
     }
+
+    .prose p{
+      margin: 0 0 var(--space-2);
+      max-width: 75ch;
+    }
+    .prose ul{
+      margin: 0 0 var(--space-2);
+      padding-left: 1.2rem;
+    }
+    .prose li{ margin: 0.25rem 0; }
+
+    /* Media blocks */
+    .media{
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .media .ph{
+      aspect-ratio: 16 / 10;
+      display: grid;
+      place-items: center;
+      padding: var(--space-3);
+      color: var(--muted);
+      text-align: center;
+    }
+    .media img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Services grid */
+    .service-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-3);
+    }
+    .card{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: var(--space-3);
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .card h3{
+      margin: 0 0 0.35rem;
+      font-size: var(--step-1);
+      line-height: 1.25;
+      text-wrap: balance;
+    }
+    .card p{
+      margin: 0.4rem 0 0;
+      color: var(--muted);
+      font-size: var(--step--1);
+    }
+
+    /* Contact */
+    .contact-box{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: var(--space-3);
+      text-align: center;
+    }
+    .contact-box .label{
+      color: var(--muted);
+      font-size: var(--step--1);
+      margin-bottom: 0.25rem;
+    }
+    .contact-box a{
+      font-size: var(--step-1);
+      font-weight: 650;
+      word-break: break-word;
+    }
+
+    footer{
+      border-top: 1px solid var(--line);
+      padding: var(--space-3) 0;
+      color: var(--muted);
+      font-size: var(--step--1);
+    }
+    .footer-inner{
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    /* Accessibility */
+    .skip-link{
+      position: absolute;
+      left: -999px;
+      top: 0;
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 0.6rem 0.8rem;
+      border-radius: 10px;
+      z-index: 1000;
+    }
+    .skip-link:focus{ left: var(--space-3); top: var(--space-3); }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="wrap">
-      <div class="nav">
-        <div class="brand" aria-label="Company name">
-          <strong>Integrix Engineering Services</strong>
-          <span>Mechanical Equipment Drafting Support</span>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!--
+    FILE PLACEMENT (recommended)
+    Put these files next to this index.html (same folder):
+      - Logo.svg
+      - (optional) picture1.jpg
+      - (optional) picture2.jpg
+
+    This page already uses your attached logo:
+      <img src="Logo.svg" ...>
+
+    Replace the placeholder media blocks below with your images when ready.
+  -->
+
+  <header id="top" data-open="false">
+    <div class="container">
+      <div class="header-inner">
+        <div class="brand" aria-label="Integrix Engineering Services">
+          <img src="Logo.svg" alt="Integrix Engineering Services logo" />
         </div>
 
-        <nav aria-label="Primary">
-          <ul>
-            <li><a href="#company">Company</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact Us for a Quote</a></li>
-          </ul>
+        <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="siteNav">
+          Menu
+        </button>
+
+        <nav id="siteNav" aria-label="Primary navigation">
+          <a href="#company">Company</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact Us</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <!-- 1) Company -->
-  <main>
-    <section id="company" class="hero">
-      <div class="wrap">
-        <span class="kicker">Engineering drafting services</span>
-        <h1>Clear, buildable drawings for mechanical equipment.</h1>
-        <p class="lead">
-          Integrix Engineering Services provides practical drafting support for mechanical equipment and assemblies.
-          We focus on producing organized, fabrication-ready drawings that help teams move from concept to shop floor
-          with fewer iterations and fewer surprises.
+  <main id="main">
+    <div class="container">
+      <div class="hero">
+        <h1>Integrix Engineering Services</h1>
+        <p class="sub">
+          <!-- EDIT THIS: short positioning statement -->
+          Engineering support for design, drafting, and documentation—focused on practical, buildable solutions.
         </p>
-
-        <div class="grid" role="list" aria-label="Company highlights">
-          <div class="card" role="listitem">
-            <h3>Drafting-first deliverables</h3>
-            <p>Clean layouts, consistent dimensioning, and drawing packages aligned to real fabrication needs.</p>
-          </div>
-          <div class="card" role="listitem">
-            <h3>Fast collaboration</h3>
-            <p>Responsive updates, clear markups, and practical design-for-manufacture feedback.</p>
-          </div>
-          <div class="card" role="listitem">
-            <h3>Simple, professional output</h3>
-            <p>Readable drawing sets that are easy to review, quote, and build from.</p>
-          </div>
-        </div>
+        <div class="rule" aria-hidden="true"></div>
       </div>
-    </section>
+    </div>
 
-    <!-- 2) Services -->
-    <section id="services">
-      <div class="wrap">
-        <h2 class="section-title">Services</h2>
-        <p class="section-sub">
-          Mechanical equipment drafting services to support fabrication, installation, and documentation.
-          Typical deliverables include 2D drawings, assembly drawings, and shop-ready packages.
-        </p>
+    <section id="company" aria-label="Company">
+      <div class="container">
+        <h2>Company</h2>
 
-        <div class="grid" aria-label="Drafting service details">
-          <div class="card" style="grid-column: span 6;">
-            <h3>Mechanical equipment drafting</h3>
+        <div class="two-col">
+          <div class="prose">
+            <!-- EDIT THIS: company introduction -->
             <p>
-              Drafting support for skids, frames, brackets, guards, panels, and general mechanical assemblies.
+              Integrix Engineering Services provides engineering and drafting support for product development,
+              fabrication, and documentation. We work with individuals and organizations to convert concepts into
+              manufacturable designs and clear technical deliverables.
             </p>
-          </div>
-          <div class="card" style="grid-column: span 6;">
-            <h3>Drawing packages</h3>
+
             <p>
-              Structured deliverables that can include GA drawings, BOMs, key dimensions, and revision tracking.
+              <!-- EDIT THIS: highlight differentiators -->
+              Typical deliverables include 2D drawings, 3D models, assemblies, design reviews, and production-ready documentation.
             </p>
-          </div>
-          <div class="card" style="grid-column: span 12;">
-            <h3>Common scope items</h3>
-            <ul class="service-list">
-              <li>2D fabrication drawings (parts, weldments, assemblies)</li>
-              <li>General arrangement drawings and key interface dimensions</li>
-              <li>Redlines / markup incorporation and drawing cleanup</li>
-              <li>Basic documentation support (title blocks, revision tables, drawing registers)</li>
+
+            <!-- OPTIONAL: edit or remove -->
+            <ul>
+              <li>Responsive communication and structured project workflows</li>
+              <li>Clear revision control and organized deliverable packages</li>
+              <li>Design intent documented for fabrication and procurement</li>
             </ul>
           </div>
+
+          <!-- Picture 1 block (replace with your own image) -->
+          <div class="media" aria-label="Company image">
+            <!--
+              Replace the placeholder with a real image like:
+              <img src="picture1.jpg" alt="Example engineering project" />
+            -->
+            <div class="ph">
+              <div>
+                <strong>Picture 1</strong><br />
+                Replace this placeholder with your image.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="services" aria-label="Services">
+      <div class="container">
+        <h2>Services</h2>
+
+        <div class="two-col">
+          <div>
+            <div class="service-grid" role="list">
+              <!-- EDIT THESE: services cards -->
+              <div class="card" role="listitem">
+                <h3>Drafting Services</h3>
+                <p>
+                  2D technical drawings, dimensioning, GD&amp;T (as required), drawing packages, and revision management.
+                </p>
+              </div>
+
+              <div class="card" role="listitem">
+                <h3>3D Modeling &amp; Assemblies</h3>
+                <p>
+                  Parametric part modeling, assembly layouts, interference checks, and export formats for fabrication.
+                </p>
+              </div>
+
+              <div class="card" role="listitem">
+                <h3>Design Support</h3>
+                <p>
+                  Concept refinement, DFM considerations, basic calculations, and documentation to support build readiness.
+                </p>
+              </div>
+
+              <div class="card" role="listitem">
+                <h3>Example Work</h3>
+                <p>
+                  <!-- EDIT THIS: example work list -->
+                  Example work 1<br />
+                  Example work 2
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Picture 2 block (replace with your own image) -->
+          <div class="media" aria-label="Services image">
+            <!--
+              Replace the placeholder with a real image like:
+              <img src="picture2.jpg" alt="Drafting and modeling example" />
+            -->
+            <div class="ph">
+              <div>
+                <strong>Picture 2</strong><br />
+                Replace this placeholder with your image.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contact" aria-label="Contact">
+      <div class="container">
+        <h2>Contact Us for a Quote</h2>
+
+        <div class="contact-box">
+          <div class="label">Email</div>
+          <!-- EDIT THIS: contact email -->
+          <a href="mailto:IntegrixEngineeringServices@gmail.com">IntegrixEngineeringServices@gmail.com</a>
+
+          <!-- OPTIONAL: add phone / location -->
+          <!-- <div class="label" style="margin-top: 0.8rem;">Phone</div>
+          <div style="font-weight:600;">(000) 000-0000</div> -->
         </div>
       </div>
     </section>
 
-    <!-- 3) Contact -->
-    <section id="contact">
-      <div class="wrap">
-        <h2 class="section-title">Contact Us for a Quote</h2>
-        <div class="quote-box">
-          <p>
-            Send a brief description of your project scope, target deliverables, and timing. If you have reference
-            sketches, markups, or existing drawings, include them for faster turnaround.
-          </p>
-
-          <!-- Replace the email below with your real email address -->
-          <a class="email" href="mailto:YOURNAME@YOURDOMAIN.COM">YOURNAME@YOURDOMAIN.COM</a>
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <div>
+            <!-- EDIT THIS: copyright -->
+            © <span id="year"></span> Integrix Engineering Services. All rights reserved.
+          </div>
+          <div>
+            <a href="#top">Back to top</a>
+          </div>
         </div>
       </div>
-    </section>
+    </footer>
   </main>
 
-  <footer>
-    <div class="wrap">
-      © <span id="year"></span> Integrix Engineering Services. All rights reserved.
-    </div>
-  </footer>
-
   <script>
-    // Auto-update footer year (optional)
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Mobile menu toggle (minimal JS)
+    (function () {
+      const header = document.querySelector("header");
+      const btn = document.getElementById("menuBtn");
+      const nav = document.getElementById("siteNav");
+
+      function setOpen(open) {
+        header.setAttribute("data-open", open ? "true" : "false");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+
+      btn.addEventListener("click", function () {
+        const isOpen = header.getAttribute("data-open") === "true";
+        setOpen(!isOpen);
+      });
+
+      // Close menu when a nav link is clicked (mobile)
+      nav.addEventListener("click", function (e) {
+        if (e.target && e.target.tagName === "A") setOpen(false);
+      });
+
+      // Close menu on resize back to desktop
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 760) setOpen(false);
+      });
+
+      // Footer year
+      document.getElementById("year").textContent = new Date().getFullYear();
+    })();
   </script>
 </body>
 </html>
